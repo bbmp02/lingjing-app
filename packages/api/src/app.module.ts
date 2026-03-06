@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { SpiritCurrencyModule } from './modules/spirit-currency/spirit-currency.module';
+import { RelationshipsModule } from './modules/relationships/relationships.module';
 
 @Module({
   imports: [
@@ -14,6 +15,8 @@ import { SpiritCurrencyModule } from './modules/spirit-currency/spirit-currency.
     UserModule,
     // 精神货币模块
     SpiritCurrencyModule,
+    // 关系图谱模块
+    RelationshipsModule,
   ],
   controllers: [],
   providers: [],
