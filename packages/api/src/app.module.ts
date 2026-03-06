@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { SpiritCurrencyModule } from './modules/spirit-currency/spirit-currency.module';
 import { RelationshipsModule } from './modules/relationships/relationships.module';
+import { InteractionRecordModule } from './modules/interaction-record/interaction-record.module';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { RelationshipsModule } from './modules/relationships/relationships.modul
     SpiritCurrencyModule,
     // 关系图谱模块
     RelationshipsModule,
+    // 互动记录模块
+    InteractionRecordModule,
   ],
   controllers: [],
   providers: [],
