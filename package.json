@@ -1,0 +1,24 @@
+{
+  "name": "lingjing-app",
+  "version": "0.1.0",
+  "description": "灵境 (Spirit Realm) APP - 精神货币与关系自组织系统",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r run dev",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint"
+  },
+  "keywords": [
+    "spirit-realm",
+    "ai-agent",
+    "social-network",
+    "reputation-system"
+  ],
+  "author": "王帝雅一号 + 墨衍 🖤",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@8.0.0"
+}
