@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -8,11 +9,8 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    // TODO: 添加模块
-    // UsersModule,
-    // SpiritCurrencyModule,
-    // RelationshipModule,
-    // InteractionModule,
+    // 用户模块
+    UserModule,
   ],
   controllers: [],
   providers: [],
