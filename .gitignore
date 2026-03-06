@@ -18,6 +18,18 @@ secret*
 *-密钥*
 *-secret*
 
+# OpenClaw 工作区文件 (不应提交)
+.openclaw/
+AGENTS.md
+BOOTSTRAP.md
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+TOOLS.md
+USER.md
+MEMORY.md
+memory/
+
 # Node.js
 node_modules/
 npm-debug.log*
