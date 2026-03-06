@@ -1,0 +1,63 @@
+# 灵境项目 .gitignore
+
+# 🔴 密钥和敏感信息 (最高优先级)
+.env
+.env.local
+.env.development
+.env.production
+*.key
+*.pem
+*.crt
+secret*
+*secret*
+密钥*
+*密钥*
+
+# 密钥管理文档 (包含 Token 的文件)
+灵境 APP- 密钥管理.md
+*-密钥*
+*-secret*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 构建输出
+dist/
+build/
+.next/
+out/
+*.log
+
+# 测试
+coverage/
+.nyc_output/
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 数据库
+*.sqlite
+*.db
+!*.sql
+
+# 日志
+logs/
+*.log
+
+# 操作系统
+.DS_Store
+Thumbs.db
