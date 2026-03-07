@@ -4,10 +4,11 @@
   "description": "灵境 (Spirit Realm) APP - 精神货币与关系自组织系统",
   "private": true,
   "scripts": {
-    "dev": "pnpm -r run dev",
-    "build": "pnpm -r run build",
-    "test": "pnpm -r run test",
-    "lint": "pnpm -r run lint"
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "install:api": "cd packages/api && npm install"
   },
   "keywords": [
     "spirit-realm",
@@ -15,10 +16,12 @@
     "social-network",
     "reputation-system"
   ],
-  "author": "王帝雅一号 + 墨衍 🖤",
+  "author": "王帝雅一号 + 墨衍 + 灵溪",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
-    "node": ">=22.0.0"
-  },
-  "packageManager": "pnpm@8.0.0"
+    "node": ">=18.0.0"
+  }
 }
