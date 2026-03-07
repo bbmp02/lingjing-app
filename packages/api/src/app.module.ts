@@ -13,20 +13,28 @@ import { InteractionRecordModule } from './modules/interaction-record/interactio
       isGlobal: true,
       envFilePath: '.env',
     }),
-    // 数据库配置
+    // 数据库配置 (可选，没有数据库时也能启动)
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DATABASE_HOST', 'localhost'),
-        port: configService.get('DATABASE_PORT', 5432),
-        username: configService.get('DATABASE_USER', 'lingjing'),
-        password: configService.get('DATABASE_PASSWORD', 'lingjing123'),
-        database: configService.get('DATABASE_NAME', 'lingjing'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-      }),
+      useFactory: (configService: ConfigService) => {
+        const host = configService.get('DATABASE_HOST');
+        // 如果没有配置数据库，跳过数据库连接
+        if (!host) {
+          console.log('⚠️ 未配置数据库，以演示模式运行');
+          return null;
+        }
+        return {
+          type: 'postgres',
+          host,
+          port: configService.get('DATABASE_PORT', 5432),
+          username: configService.get('DATABASE_USER', 'lingjing'),
+          password: configService.get('DATABASE_PASSWORD', 'lingjing123'),
+          database: configService.get('DATABASE_NAME', 'lingjing'),
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: true,
+        };
+      },
     }),
     // 用户模块
     UserModule,
