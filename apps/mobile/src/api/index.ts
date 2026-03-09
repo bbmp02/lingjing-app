@@ -1,5 +1,5 @@
-// API 配置
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'https://lingjingai.chat/api';
+// API 配置 - 本地开发环境
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 class ApiClient {
   private baseUrl: string;

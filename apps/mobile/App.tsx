@@ -113,7 +113,7 @@ export default function App() {
       {/* Status */}
       <View style={styles.status}>
         <Text style={styles.statusText}>
-          API: https://lingjingai.chat/api
+          API: http://localhost:3000/api
         </Text>
       </View>
     </View>

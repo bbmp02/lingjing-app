@@ -1,51 +1,59 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './modules/user/user.module';
-import { SpiritCurrencyModule } from './modules/spirit-currency/spirit-currency.module';
-import { RelationshipsModule } from './modules/relationships/relationships.module';
-import { InteractionRecordModule } from './modules/interaction-record/interaction-record.module';
+
+// 实体
+import { User } from './modules/user/user.entity';
+import { SpiritTransaction } from './modules/spirit-currency/spirit-transaction.entity';
+import { Relationship } from './modules/relationships/relationships.entity';
+import { InteractionRecord } from './modules/interaction-record/interaction-record.entity';
+
+// 控制器
+import { UserController } from './modules/user/user.controller';
+import { SpiritCurrencyController } from './modules/spirit-currency/spirit-currency.controller';
+import { RelationshipsController } from './modules/relationships/relationships.controller';
+import { InteractionRecordController } from './modules/interaction-record/interaction-record.controller';
+
+// 服务
+import { UserService } from './modules/user/user.service';
+import { SpiritCurrencyService } from './modules/spirit-currency/spirit-currency.service';
+import { RelationshipsService } from './modules/relationships/relationships.service';
+import { InteractionRecordService } from './modules/interaction-record/interaction-record.service';
+import { AlgorithmService } from './modules/algorithm/algorithm.service';
+import { AlgorithmController } from './modules/algorithm/algorithm.controller';
 
 @Module({
   imports: [
-    // 加载环境变量配置
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-    }),
-    // 数据库配置 (可选，没有数据库时也能启动)
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('DATABASE_HOST', 'localhost'),
+        port: configService.get('DATABASE_PORT', 5432),
+        username: configService.get('DATABASE_USER', 'lingjing'),
+        password: configService.get('DATABASE_PASSWORD', 'lingjing123'),
+        database: configService.get('DATABASE_NAME', 'lingjing'),
+        entities: [User, SpiritTransaction, Relationship, InteractionRecord],
+        synchronize: true,
+      }),
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        const host = configService.get('DATABASE_HOST');
-        // 如果没有配置数据库，跳过数据库连接
-        if (!host) {
-          console.log('⚠️ 未配置数据库，以演示模式运行');
-          return null;
-        }
-        return {
-          type: 'postgres',
-          host,
-          port: configService.get('DATABASE_PORT', 5432),
-          username: configService.get('DATABASE_USER', 'lingjing'),
-          password: configService.get('DATABASE_PASSWORD', 'lingjing123'),
-          database: configService.get('DATABASE_NAME', 'lingjing'),
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          synchronize: true,
-        };
-      },
     }),
-    // 用户模块
-    UserModule,
-    // 精神货币模块
-    SpiritCurrencyModule,
-    // 关系图谱模块
-    RelationshipsModule,
-    // 互动记录模块
-    InteractionRecordModule,
+    TypeOrmModule.forFeature([User, SpiritTransaction, Relationship, InteractionRecord]),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [
+    UserController, 
+    SpiritCurrencyController,
+    RelationshipsController,
+    InteractionRecordController,
+    AlgorithmController
+  ],
+  providers: [
+    UserService,
+    SpiritCurrencyService,
+    RelationshipsService,
+    InteractionRecordService,
+    AlgorithmService
+  ],
 })
 export class AppModule {}
